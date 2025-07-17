@@ -1,0 +1,185 @@
+openapi: 3.0.0
+info:
+  description: 'An SDK to integrate virus and malware scan capabilities into Python applications. Scan files for viruses, trojans, and other kinds of malware with attachmentAV powered by Sophos.'
+  title: attachmentAV
+  version: 1.0.0
+servers:
+- url: https://eu.developer.attachmentav.com/v1
+security:
+- apiKeyAuth: []
+- bearerAuth: []
+tags:
+- name: attachmentAV
+paths:
+  /scan/sync/binary:
+    post:
+      description: 'Upload a file, scan the file, and return the scan result.'
+      tags: [attachmentAV]
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              format: binary
+              type: string
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanResult'
+          description: Success
+  /scan/sync/download:
+    post:
+      description: 'Download a file from a remote location (HTTP/HTTPS), scan the file, and return the scan result.'
+      tags: [ attachmentAV ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncDownloadScanRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanResult'
+          description: Success
+  /scan/sync/s3:
+    post:
+      description: 'Download a file from S3, scan the file, and return the scan result. A bucket policy is required to grant attachmentAV access to the S3 objects.'
+      tags: [attachmentAV]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncS3ScanRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanResult'
+          description: Success
+  /scan/async/download:
+    post:
+      description: 'Download a file from a remote location (HTTP/HTTPS), scan the file, and post the scan result to your callback URL.'
+      tags: [ attachmentAV ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsyncDownloadScanRequest'
+        required: true
+      responses:
+        '204':
+          description: Success
+  /scan/async/s3:
+    post:
+      description: 'Download a file from S3, scan the file, and post the scan result to your callback URL. A bucket policy is required to grant attachmentAV access to the S3 objects.'
+      tags: [ attachmentAV ]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsyncS3ScanRequest'
+        required: true
+      responses:
+        '204':
+          description: Success
+components:
+  schemas:
+    ScanResult:
+      example:
+        size: size
+        realfiletype: realfiletype
+        finding: finding
+        status: status
+      properties:
+        status:
+          type: string
+        finding:
+          type: string
+        size:
+          type: integer
+        realfiletype:
+          type: string
+      type: object
+    SyncDownloadScanRequest:
+      properties:
+        download_url:
+          type: string
+        download_headers:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - download_url
+      type: object
+    SyncS3ScanRequest:
+      properties:
+        bucket:
+          type: string
+        key:
+          type: string
+        version:
+          type: string
+      required:
+      - bucket
+      - key
+      type: object
+    AsyncDownloadScanRequest:
+      properties:
+        download_url:
+          type: string
+        download_headers:
+          additionalProperties:
+            type: string
+          type: object
+        callback_url:
+          type: string
+        callback_headers:
+          additionalProperties:
+            type: string
+          type: object
+        trace_id:
+          type: string
+        custom_data:
+          type: string
+      required:
+        - download_url
+        - callback_url
+      type: object
+    AsyncS3ScanRequest:
+      properties:
+        bucket:
+          type: string
+        key:
+          type: string
+        version:
+          type: string
+        callback_url:
+          type: string
+        callback_headers:
+          additionalProperties:
+            type: string
+          type: object
+        trace_id:
+          type: string
+        custom_data:
+          type: string
+      required:
+        - bucket
+        - key
+        - callback_url
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      in: header
+      name: x-api-key
+      type: apiKey
+    bearerAuth:
+      type: http
+      scheme: bearer
