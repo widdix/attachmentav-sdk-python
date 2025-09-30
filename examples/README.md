@@ -5,4 +5,8 @@ pip3 install attachmentav-virus-malware-scan-sdk
 
 python3 sync-download.py
 python3 sync-binary.py
+python3 sync-s3.py
+
+python3 async-download.py
+python3 async-s3.py
 ```
