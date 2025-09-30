@@ -89,6 +89,17 @@ paths:
       responses:
         '204':
           description: Success
+  /whoami:
+    get:
+      description: 'Get information abour yourself.'
+      tags: [attachmentAV]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Whoami'
+          description: Success
 components:
   schemas:
     ScanResult:
@@ -174,6 +185,13 @@ components:
         - bucket
         - key
         - callback_url
+      type: object
+    Whoami:
+      example:
+        tenantId: tenantId
+      properties:
+        tenantId:
+          type: string
       type: object
   securitySchemes:
     apiKeyAuth:

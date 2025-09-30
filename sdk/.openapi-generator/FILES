@@ -16,6 +16,7 @@ attachmentav/models/async_s3_scan_request.py
 attachmentav/models/scan_result.py
 attachmentav/models/sync_download_scan_request.py
 attachmentav/models/sync_s3_scan_request.py
+attachmentav/models/whoami.py
 attachmentav/py.typed
 attachmentav/rest.py
 docs/AsyncDownloadScanRequest.md
@@ -24,6 +25,7 @@ docs/AttachmentAVApi.md
 docs/ScanResult.md
 docs/SyncDownloadScanRequest.md
 docs/SyncS3ScanRequest.md
+docs/Whoami.md
 git_push.sh
 pyproject.toml
 requirements.txt
