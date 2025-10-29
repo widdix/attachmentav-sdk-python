@@ -11,7 +11,7 @@ rm -fR sdk/
 To generate the SDK use the following command. Don't forget to update the `packageVersion`.
 
 ```
-openapi-generator generate -i api.yml -g python -o ./sdk --additional-properties=packageName=attachmentav,packageVersion=0.1.0,projectName=attachmentav-virus-scan-sdk
+openapi-generator generate -i api.yml -g python -o ./sdk --additional-properties=packageName=attachmentav,packageVersion=0.2.0,projectName=attachmentav-virus-scan-sdk
 ```
 
 The `pyproject.toml` needs to be modified manually, as the generator does not provide the necessary properties.

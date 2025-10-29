@@ -17,22 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from attachmentav.models.usage_result_quota import UsageResultQuota
 from typing import Optional, Set
 from typing_extensions import Self
 
-class AsyncDownloadScanRequest(BaseModel):
+class UsageResult(BaseModel):
     """
-    AsyncDownloadScanRequest
+    UsageResult
     """ # noqa: E501
-    download_url: StrictStr
-    download_headers: Optional[Dict[str, StrictStr]] = None
-    callback_url: StrictStr
-    callback_headers: Optional[Dict[str, StrictStr]] = None
-    trace_id: Optional[StrictStr] = None
-    custom_data: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["download_url", "download_headers", "callback_url", "callback_headers", "trace_id", "custom_data"]
+    credits: Optional[Union[StrictFloat, StrictInt]] = None
+    quota: Optional[UsageResultQuota] = None
+    __properties: ClassVar[List[str]] = ["credits", "quota"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +49,7 @@ class AsyncDownloadScanRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AsyncDownloadScanRequest from a JSON string"""
+        """Create an instance of UsageResult from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,11 +70,14 @@ class AsyncDownloadScanRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of quota
+        if self.quota:
+            _dict['quota'] = self.quota.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AsyncDownloadScanRequest from a dict"""
+        """Create an instance of UsageResult from a dict"""
         if obj is None:
             return None
 
@@ -85,12 +85,8 @@ class AsyncDownloadScanRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "download_url": obj.get("download_url"),
-            "download_headers": obj.get("download_headers"),
-            "callback_url": obj.get("callback_url"),
-            "callback_headers": obj.get("callback_headers"),
-            "trace_id": obj.get("trace_id"),
-            "custom_data": obj.get("custom_data")
+            "credits": obj.get("credits"),
+            "quota": UsageResultQuota.from_dict(obj["quota"]) if obj.get("quota") is not None else None
         })
         return _obj
 

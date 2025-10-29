@@ -89,6 +89,17 @@ paths:
       responses:
         '204':
           description: Success
+  /usage:
+    get:
+      description: 'Get remaining credits and quota.'
+      tags: [ attachmentAV ]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageResult'
+          description: Success
 components:
   schemas:
     ScanResult:
@@ -106,6 +117,23 @@ components:
           type: integer
         realfiletype:
           type: string
+      type: object
+    UsageResult:
+      example:
+        size: size
+        realfiletype: realfiletype
+        finding: finding
+        status: status
+      properties:
+        credits:
+          type: number
+        quota:
+          type: object
+          properties:
+            limit:
+              type: number
+            period:
+              type: string
       type: object
     SyncDownloadScanRequest:
       properties:
