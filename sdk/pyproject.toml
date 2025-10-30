@@ -1,6 +1,6 @@
 [project]
 name = "attachmentav_virus_malware_scan_sdk"
-version = "0.2.0"
+version = "0.3.0"
 description = "A virus scan SDK for Python. Scan files for viruses, trojans, and other kinds of malware with attachmentAV."
 authors = [
   {name = "Andreas Wittig",email = "andreas@attachmentav.com"},

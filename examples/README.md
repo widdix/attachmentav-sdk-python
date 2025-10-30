@@ -9,4 +9,6 @@ python3 sync-s3.py
 
 python3 async-download.py
 python3 async-s3.py
+
+python3 whoami.py
 ```

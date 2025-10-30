@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "attachmentav-virus-scan-sdk"
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 PYTHON_REQUIRES = ">= 3.9"
 REQUIRES = [
     "urllib3 >= 2.1.0, < 3.0.0",
@@ -47,3 +47,4 @@ setup(
     An SDK to integrate virus and malware scan capabilities into Python applications. Scan files for viruses, trojans, and other kinds of malware with attachmentAV powered by Sophos.
     """,  # noqa: E501
     package_data={"attachmentav": ["py.typed"]},
+)

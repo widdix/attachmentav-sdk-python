@@ -171,13 +171,39 @@ The maximum file size is 5 GB. The request timeout is 29 seconds; the asynchrono
 
 > Not supported by attachmentAV Virus Scan API (Self-hosted on AWS) yet. Contact [hello@attachmentav.com](hello@attachmentav.com) to let us know, in case you need this feature.
 
-```javascript
+```python
 async_s3_scan_request = attachmentav.AsyncS3ScanRequest(
   bucket = "example-bucket",
   key = "demo.txt",
   callback_url = "https://example.com/callback"
 )
 api_instance.scan_async_s3_post(async_s3_scan_request)
+```
+
+### Who AM I
+
+Get information abour yourself.
+
+See [Whoami](sdk/models/Whoami.ts) for details.
+
+> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS).
+
+```python
+whoami_result = api_instance.whoami_get()
+print(whoami_result)
+```
+
+### Usage
+
+Get remaining credits and quota.
+
+See [Usage](sdk/models/Usage.ts) for details.
+
+> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS).
+
+```python
+usage_result = api_instance.usage_get()
+print(usage_result)
 ```
 
 ## Model
