@@ -131,10 +131,10 @@ components:
       type: object
     Usage:
       example:
-        size: size
-        realfiletype: realfiletype
-        finding: finding
-        status: status
+        credits: credits
+        quota:
+          limit: limit
+          period: period
       properties:
         credits:
           type: number
