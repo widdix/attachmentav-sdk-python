@@ -19,7 +19,6 @@ The `pyproject.toml` needs to be modified manually, as the generator does not pr
 
 ```
 [project]
-[project]
 name = "attachmentav_virus_malware_scan_sdk"
 version = "0.1.0"
 description = "A virus scan SDK for Python. Scan files for viruses, trojans, and other kinds of malware with attachmentAV."
@@ -30,14 +29,11 @@ license = "MIT"
 readme = "README.md"
 keywords = ["virus", "malware", "scan", "scanner", "sdk"]
 requires-python = ">=3.9"
+```
 
-dependencies = [
-  "urllib3 (>=2.1.0,<3.0.0)",
-  "python-dateutil (>=2.8.2)",
-  "pydantic (>=2)",
-  "typing-extensions (>=4.7.1)"
-]
+As well as.
 
+```
 [project.urls]
 Repository = "https://github.com/widdix/attachmentav-sdk-python"
 ```
@@ -58,7 +54,7 @@ setup(
     include_package_data=True,
     long_description_content_type='text/markdown',
     long_description="""\
-    An SDK to integrate virus and malware scan capabilities into JavaScript applications. Scan files for viruses, trojans, and other kinds of malware with attachmentAV powered by Sophos.
+    An SDK to integrate virus and malware scan capabilities into Python applications. Scan files for viruses, trojans, and other kinds of malware with attachmentAV powered by Sophos.
     """,  # noqa: E501
     package_data={"attachmentav": ["py.typed"]},
 )
