@@ -62,6 +62,12 @@ class TestAttachmentAVApi(unittest.TestCase):
         """
         pass
 
+    def test_whoami_get(self) -> None:
+        """Test case for whoami_get
+
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

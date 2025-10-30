@@ -47,4 +47,3 @@ setup(
     An SDK to integrate virus and malware scan capabilities into Python applications. Scan files for viruses, trojans, and other kinds of malware with attachmentAV powered by Sophos.
     """,  # noqa: E501
     package_data={"attachmentav": ["py.typed"]},
-)

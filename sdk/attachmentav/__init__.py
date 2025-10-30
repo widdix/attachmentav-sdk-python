@@ -33,8 +33,9 @@ __all__ = [
     "ScanResult",
     "SyncDownloadScanRequest",
     "SyncS3ScanRequest",
-    "UsageResult",
-    "UsageResultQuota",
+    "Usage",
+    "UsageQuota",
+    "Whoami",
 ]
 
 if __import__("typing").TYPE_CHECKING:
@@ -58,8 +59,9 @@ if __import__("typing").TYPE_CHECKING:
     from attachmentav.models.scan_result import ScanResult as ScanResult
     from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest as SyncDownloadScanRequest
     from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest as SyncS3ScanRequest
-    from attachmentav.models.usage_result import UsageResult as UsageResult
-    from attachmentav.models.usage_result_quota import UsageResultQuota as UsageResultQuota
+    from attachmentav.models.usage import Usage as Usage
+    from attachmentav.models.usage_quota import UsageQuota as UsageQuota
+    from attachmentav.models.whoami import Whoami as Whoami
     
 else:
     from lazy_imports import LazyModule, as_package, load
@@ -89,8 +91,9 @@ from attachmentav.models.async_s3_scan_request import AsyncS3ScanRequest as Asyn
 from attachmentav.models.scan_result import ScanResult as ScanResult
 from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest as SyncDownloadScanRequest
 from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest as SyncS3ScanRequest
-from attachmentav.models.usage_result import UsageResult as UsageResult
-from attachmentav.models.usage_result_quota import UsageResultQuota as UsageResultQuota
+from attachmentav.models.usage import Usage as Usage
+from attachmentav.models.usage_quota import UsageQuota as UsageQuota
+from attachmentav.models.whoami import Whoami as Whoami
 
 """,
             name=__name__,

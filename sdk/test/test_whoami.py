@@ -14,10 +14,10 @@
 
 import unittest
 
-from attachmentav.models.usage_result_quota import UsageResultQuota
+from attachmentav.models.whoami import Whoami
 
-class TestUsageResultQuota(unittest.TestCase):
-    """UsageResultQuota unit test stubs"""
+class TestWhoami(unittest.TestCase):
+    """Whoami unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,26 +25,25 @@ class TestUsageResultQuota(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> UsageResultQuota:
-        """Test UsageResultQuota
+    def make_instance(self, include_optional) -> Whoami:
+        """Test Whoami
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `UsageResultQuota`
+        # uncomment below to create an instance of `Whoami`
         """
-        model = UsageResultQuota()
+        model = Whoami()
         if include_optional:
-            return UsageResultQuota(
-                limit = 1.337,
-                period = ''
+            return Whoami(
+                tenant_id = ''
             )
         else:
-            return UsageResultQuota(
+            return Whoami(
         )
         """
 
-    def testUsageResultQuota(self):
-        """Test UsageResultQuota"""
+    def testWhoami(self):
+        """Test Whoami"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

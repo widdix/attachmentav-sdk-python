@@ -98,7 +98,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UsageResult'
+                $ref: '#/components/schemas/Usage'
+          description: Success
+  /whoami:
+    get:
+      description: 'Get information abour yourself.'
+      tags: [attachmentAV]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Whoami'
           description: Success
 components:
   schemas:
@@ -118,7 +129,7 @@ components:
         realfiletype:
           type: string
       type: object
-    UsageResult:
+    Usage:
       example:
         size: size
         realfiletype: realfiletype
@@ -202,6 +213,13 @@ components:
         - bucket
         - key
         - callback_url
+      type: object
+    Whoami:
+      example:
+        tenantId: tenantId
+      properties:
+        tenantId:
+          type: string
       type: object
   securitySchemes:
     apiKeyAuth:

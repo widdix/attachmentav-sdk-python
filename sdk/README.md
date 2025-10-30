@@ -103,6 +103,7 @@ Class | Method | HTTP request | Description
 *AttachmentAVApi* | [**scan_sync_download_post**](docs/AttachmentAVApi.md#scan_sync_download_post) | **POST** /scan/sync/download | 
 *AttachmentAVApi* | [**scan_sync_s3_post**](docs/AttachmentAVApi.md#scan_sync_s3_post) | **POST** /scan/sync/s3 | 
 *AttachmentAVApi* | [**usage_get**](docs/AttachmentAVApi.md#usage_get) | **GET** /usage | 
+*AttachmentAVApi* | [**whoami_get**](docs/AttachmentAVApi.md#whoami_get) | **GET** /whoami | 
 
 
 ## Documentation For Models
@@ -112,8 +113,9 @@ Class | Method | HTTP request | Description
  - [ScanResult](docs/ScanResult.md)
  - [SyncDownloadScanRequest](docs/SyncDownloadScanRequest.md)
  - [SyncS3ScanRequest](docs/SyncS3ScanRequest.md)
- - [UsageResult](docs/UsageResult.md)
- - [UsageResultQuota](docs/UsageResultQuota.md)
+ - [Usage](docs/Usage.md)
+ - [UsageQuota](docs/UsageQuota.md)
+ - [Whoami](docs/Whoami.md)
 
 
 <a id="documentation-for-authorization"></a>

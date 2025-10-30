@@ -14,10 +14,10 @@
 
 import unittest
 
-from attachmentav.models.usage_result import UsageResult
+from attachmentav.models.usage import Usage
 
-class TestUsageResult(unittest.TestCase):
-    """UsageResult unit test stubs"""
+class TestUsage(unittest.TestCase):
+    """Usage unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,28 +25,28 @@ class TestUsageResult(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> UsageResult:
-        """Test UsageResult
+    def make_instance(self, include_optional) -> Usage:
+        """Test Usage
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `UsageResult`
+        # uncomment below to create an instance of `Usage`
         """
-        model = UsageResult()
+        model = Usage()
         if include_optional:
-            return UsageResult(
+            return Usage(
                 credits = 1.337,
-                quota = attachmentav.models.usage_result_quota.UsageResult_quota(
+                quota = attachmentav.models.usage_quota.Usage_quota(
                     limit = 1.337, 
                     period = '', )
             )
         else:
-            return UsageResult(
+            return Usage(
         )
         """
 
-    def testUsageResult(self):
-        """Test UsageResult"""
+    def testUsage(self):
+        """Test Usage"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

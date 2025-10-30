@@ -1,4 +1,4 @@
-# UsageResult
+# Usage
 
 
 ## Properties
@@ -6,24 +6,24 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credits** | **float** |  | [optional] 
-**quota** | [**UsageResultQuota**](UsageResultQuota.md) |  | [optional] 
+**quota** | [**UsageQuota**](UsageQuota.md) |  | [optional] 
 
 ## Example
 
 ```python
-from attachmentav.models.usage_result import UsageResult
+from attachmentav.models.usage import Usage
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of UsageResult from a JSON string
-usage_result_instance = UsageResult.from_json(json)
+# create an instance of Usage from a JSON string
+usage_instance = Usage.from_json(json)
 # print the JSON string representation of the object
-print(UsageResult.to_json())
+print(Usage.to_json())
 
 # convert the object into a dict
-usage_result_dict = usage_result_instance.to_dict()
-# create an instance of UsageResult from a dict
-usage_result_from_dict = UsageResult.from_dict(usage_result_dict)
+usage_dict = usage_instance.to_dict()
+# create an instance of Usage from a dict
+usage_from_dict = Usage.from_dict(usage_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -20,8 +20,9 @@ if __import__("typing").TYPE_CHECKING:
     from attachmentav.models.scan_result import ScanResult
     from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest
     from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest
-    from attachmentav.models.usage_result import UsageResult
-    from attachmentav.models.usage_result_quota import UsageResultQuota
+    from attachmentav.models.usage import Usage
+    from attachmentav.models.usage_quota import UsageQuota
+    from attachmentav.models.whoami import Whoami
     
 else:
     from lazy_imports import LazyModule, as_package, load
@@ -35,8 +36,9 @@ from attachmentav.models.async_s3_scan_request import AsyncS3ScanRequest
 from attachmentav.models.scan_result import ScanResult
 from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest
 from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest
-from attachmentav.models.usage_result import UsageResult
-from attachmentav.models.usage_result_quota import UsageResultQuota
+from attachmentav.models.usage import Usage
+from attachmentav.models.usage_quota import UsageQuota
+from attachmentav.models.whoami import Whoami
 
 """,
             name=__name__,
