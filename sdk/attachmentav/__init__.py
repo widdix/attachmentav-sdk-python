@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 # Define package exports
 __all__ = [
@@ -33,10 +33,45 @@ __all__ = [
     "ScanResult",
     "SyncDownloadScanRequest",
     "SyncS3ScanRequest",
+    "Usage",
+    "UsageQuota",
     "Whoami",
 ]
 
-# import apis into sdk package
+if __import__("typing").TYPE_CHECKING:
+    # import apis into sdk package
+    from attachmentav.api.attachment_av_api import AttachmentAVApi as AttachmentAVApi
+    
+    # import ApiClient
+    from attachmentav.api_response import ApiResponse as ApiResponse
+    from attachmentav.api_client import ApiClient as ApiClient
+    from attachmentav.configuration import Configuration as Configuration
+    from attachmentav.exceptions import OpenApiException as OpenApiException
+    from attachmentav.exceptions import ApiTypeError as ApiTypeError
+    from attachmentav.exceptions import ApiValueError as ApiValueError
+    from attachmentav.exceptions import ApiKeyError as ApiKeyError
+    from attachmentav.exceptions import ApiAttributeError as ApiAttributeError
+    from attachmentav.exceptions import ApiException as ApiException
+    
+    # import models into sdk package
+    from attachmentav.models.async_download_scan_request import AsyncDownloadScanRequest as AsyncDownloadScanRequest
+    from attachmentav.models.async_s3_scan_request import AsyncS3ScanRequest as AsyncS3ScanRequest
+    from attachmentav.models.scan_result import ScanResult as ScanResult
+    from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest as SyncDownloadScanRequest
+    from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest as SyncS3ScanRequest
+    from attachmentav.models.usage import Usage as Usage
+    from attachmentav.models.usage_quota import UsageQuota as UsageQuota
+    from attachmentav.models.whoami import Whoami as Whoami
+    
+else:
+    from lazy_imports import LazyModule, as_package, load
+
+    load(
+        LazyModule(
+            *as_package(__file__),
+            ("__version__", __version__),
+            ("__all__", __all__),
+            """# import apis into sdk package
 from attachmentav.api.attachment_av_api import AttachmentAVApi as AttachmentAVApi
 
 # import ApiClient
@@ -56,5 +91,12 @@ from attachmentav.models.async_s3_scan_request import AsyncS3ScanRequest as Asyn
 from attachmentav.models.scan_result import ScanResult as ScanResult
 from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest as SyncDownloadScanRequest
 from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest as SyncS3ScanRequest
+from attachmentav.models.usage import Usage as Usage
+from attachmentav.models.usage_quota import UsageQuota as UsageQuota
 from attachmentav.models.whoami import Whoami as Whoami
 
+""",
+            name=__name__,
+            doc=__doc__,
+        )
+    )

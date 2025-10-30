@@ -89,6 +89,17 @@ paths:
       responses:
         '204':
           description: Success
+  /usage:
+    get:
+      description: 'Get remaining credits and quota.'
+      tags: [ attachmentAV ]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usage'
+          description: Success
   /whoami:
     get:
       description: 'Get information abour yourself.'
@@ -117,6 +128,23 @@ components:
           type: integer
         realfiletype:
           type: string
+      type: object
+    Usage:
+      example:
+        credits: credits
+        quota:
+          limit: limit
+          period: period
+      properties:
+        credits:
+          type: number
+        quota:
+          type: object
+          properties:
+            limit:
+              type: number
+            period:
+              type: string
       type: object
     SyncDownloadScanRequest:
       properties:

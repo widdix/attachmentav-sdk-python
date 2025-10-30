@@ -91,7 +91,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/0.1.0/python'
+        self.user_agent = 'OpenAPI-Generator/0.2.0/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):
@@ -460,13 +460,13 @@ class ApiClient:
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)
-        elif klass is object:
+        elif klass == object:
             return self.__deserialize_object(data)
-        elif klass is datetime.date:
+        elif klass == datetime.date:
             return self.__deserialize_date(data)
-        elif klass is datetime.datetime:
+        elif klass == datetime.datetime:
             return self.__deserialize_datetime(data)
-        elif klass is decimal.Decimal:
+        elif klass == decimal.Decimal:
             return decimal.Decimal(data)
         elif issubclass(klass, Enum):
             return self.__deserialize_enum(data, klass)

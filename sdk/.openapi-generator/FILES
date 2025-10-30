@@ -1,6 +1,7 @@
 .github/workflows/python.yml
 .gitignore
 .gitlab-ci.yml
+.openapi-generator-ignore
 .travis.yml
 README.md
 attachmentav/__init__.py
@@ -16,6 +17,8 @@ attachmentav/models/async_s3_scan_request.py
 attachmentav/models/scan_result.py
 attachmentav/models/sync_download_scan_request.py
 attachmentav/models/sync_s3_scan_request.py
+attachmentav/models/usage.py
+attachmentav/models/usage_quota.py
 attachmentav/models/whoami.py
 attachmentav/py.typed
 attachmentav/rest.py
@@ -25,6 +28,8 @@ docs/AttachmentAVApi.md
 docs/ScanResult.md
 docs/SyncDownloadScanRequest.md
 docs/SyncS3ScanRequest.md
+docs/Usage.md
+docs/UsageQuota.md
 docs/Whoami.md
 git_push.sh
 pyproject.toml
@@ -33,4 +38,13 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_async_download_scan_request.py
+test/test_async_s3_scan_request.py
+test/test_attachment_av_api.py
+test/test_scan_result.py
+test/test_sync_download_scan_request.py
+test/test_sync_s3_scan_request.py
+test/test_usage.py
+test/test_usage_quota.py
+test/test_whoami.py
 tox.ini

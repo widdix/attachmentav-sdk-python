@@ -21,23 +21,24 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "attachmentav-virus-scan-sdk"
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 PYTHON_REQUIRES = ">= 3.9"
 REQUIRES = [
     "urllib3 >= 2.1.0, < 3.0.0",
     "python-dateutil >= 2.8.2",
     "pydantic >= 2",
     "typing-extensions >= 4.7.1",
+    "lazy-imports >= 1, < 2",
 ]
 
 setup(
     name=NAME,
     version=VERSION,
-    description="attachmentAV",
-    author="OpenAPI Generator community",
-    author_email="team@openapitools.org",
-    url="",
-    keywords=["OpenAPI", "OpenAPI-Generator", "attachmentAV"],
+    description="A virus scan SDK for Python. Scan files for viruses, trojans, and other kinds of malware with attachmentAV.",
+    author="Andreas Wittig",
+    author_email="andreas@attachmentav.com",
+    url="https://github.com/widdix/attachmentav-sdk-python",
+    keywords=["virus", "malware", "scan", "scanner", "sdk"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
@@ -46,4 +47,3 @@ setup(
     An SDK to integrate virus and malware scan capabilities into Python applications. Scan files for viruses, trojans, and other kinds of malware with attachmentAV powered by Sophos.
     """,  # noqa: E501
     package_data={"attachmentav": ["py.typed"]},
-)

@@ -56,8 +56,14 @@ class TestAttachmentAVApi(unittest.TestCase):
         """
         pass
 
-    def test_v1_whoami_get(self) -> None:
-        """Test case for v1_whoami_get
+    def test_usage_get(self) -> None:
+        """Test case for usage_get
+
+        """
+        pass
+
+    def test_whoami_get(self) -> None:
+        """Test case for whoami_get
 
         """
         pass
