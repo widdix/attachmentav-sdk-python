@@ -1,4 +1,3 @@
-import hashlib
 import http.server
 import socketserver
 import sys

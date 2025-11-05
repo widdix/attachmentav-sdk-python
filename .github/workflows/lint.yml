@@ -1,0 +1,14 @@
+name: lint
+on:
+  push: {}
+defaults:
+  run:
+    shell: bash
+jobs:
+  lint:
+    runs-on: ['hyperenv', 'medium-eu-west-1']
+    steps:
+    - uses: actions/checkout@v4
+    - uses: 'astral-sh/ruff-action@v3'
+      with:
+        src: './examples'
