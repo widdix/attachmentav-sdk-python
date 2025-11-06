@@ -75,14 +75,12 @@ When following the setup guide, you specified the `ApiKeys` parameter for the Cl
 ```python
 import attachmentav
 
-configuration = attachmentav.Configuration(
-  host = "https://example.com/api/v1"
-)
-configuration.api_key['bearerAuth'] = "<API_KEY_PLACEHOLDER>"
+configuration = attachmentav.Configuration()
+configuration.access_token = "<API_KEY_PLACEHOLDER>"
+configuration.host = "https://attachmentav.yourcompany.com/api/v1"
 
 with attachmentav.ApiClient(configuration) as api_client:
   api_instance = attachmentav.AttachmentAVApi(api_client)
-
 ```
 
 ## Examples
