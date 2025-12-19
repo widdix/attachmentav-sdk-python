@@ -35,11 +35,11 @@ class TestAsyncDownloadScanRequest(unittest.TestCase):
         model = AsyncDownloadScanRequest()
         if include_optional:
             return AsyncDownloadScanRequest(
-                download_url = '',
+                download_url = 'https://rZ# \\vRsp&$ARjbhJkfC< ^&T\\{<\'cs)#<`206.254.11.254',
                 download_headers = {
                     'key' : ''
                     },
-                callback_url = '',
+                callback_url = 'https://rZ# \\vRsp&$ARjbhJkfC< ^&T\\{<\'cs)#<`206.254.11.254',
                 callback_headers = {
                     'key' : ''
                     },
@@ -48,8 +48,7 @@ class TestAsyncDownloadScanRequest(unittest.TestCase):
             )
         else:
             return AsyncDownloadScanRequest(
-                download_url = '',
-                callback_url = '',
+                download_url = 'https://rZ# \\vRsp&$ARjbhJkfC< ^&T\\{<\'cs)#<`206.254.11.254',
         )
         """
 

@@ -40,6 +40,8 @@ class TestUsageQuota(unittest.TestCase):
             )
         else:
             return UsageQuota(
+                limit = 1.337,
+                period = '',
         )
         """
 

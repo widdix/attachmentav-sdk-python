@@ -17,8 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,9 +26,9 @@ class ScanResult(BaseModel):
     """
     ScanResult
     """ # noqa: E501
-    status: Optional[StrictStr] = None
+    status: StrictStr
     finding: Optional[StrictStr] = None
-    size: Optional[StrictInt] = None
+    size: Optional[Union[StrictFloat, StrictInt]] = None
     realfiletype: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["status", "finding", "size", "realfiletype"]
 

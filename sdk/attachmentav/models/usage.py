@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Union
 from attachmentav.models.usage_quota import UsageQuota
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,8 +27,8 @@ class Usage(BaseModel):
     """
     Usage
     """ # noqa: E501
-    credits: Optional[Union[StrictFloat, StrictInt]] = None
-    quota: Optional[UsageQuota] = None
+    credits: Union[StrictFloat, StrictInt]
+    quota: UsageQuota
     __properties: ClassVar[List[str]] = ["credits", "quota"]
 
     model_config = ConfigDict(

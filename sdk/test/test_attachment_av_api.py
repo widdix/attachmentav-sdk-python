@@ -32,6 +32,12 @@ class TestAttachmentAVApi(unittest.TestCase):
         """
         pass
 
+    def test_scan_async_result_get(self) -> None:
+        """Test case for scan_async_result_get
+
+        """
+        pass
+
     def test_scan_async_s3_post(self) -> None:
         """Test case for scan_async_s3_post
 

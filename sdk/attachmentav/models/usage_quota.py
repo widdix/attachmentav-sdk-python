@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing import Any, ClassVar, Dict, List, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,8 +26,8 @@ class UsageQuota(BaseModel):
     """
     UsageQuota
     """ # noqa: E501
-    limit: Optional[Union[StrictFloat, StrictInt]] = None
-    period: Optional[StrictStr] = None
+    limit: Union[StrictFloat, StrictInt]
+    period: StrictStr
     __properties: ClassVar[List[str]] = ["limit", "period"]
 
     model_config = ConfigDict(

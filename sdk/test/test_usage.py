@@ -42,6 +42,10 @@ class TestUsage(unittest.TestCase):
             )
         else:
             return Usage(
+                credits = 1.337,
+                quota = attachmentav.models.usage_quota.Usage_quota(
+                    limit = 1.337, 
+                    period = '', ),
         )
         """
 

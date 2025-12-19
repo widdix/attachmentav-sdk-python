@@ -39,6 +39,7 @@ class TestWhoami(unittest.TestCase):
             )
         else:
             return Whoami(
+                tenant_id = '',
         )
         """
 

@@ -37,11 +37,12 @@ class TestScanResult(unittest.TestCase):
             return ScanResult(
                 status = '',
                 finding = '',
-                size = 56,
+                size = 1.337,
                 realfiletype = ''
             )
         else:
             return ScanResult(
+                status = '',
         )
         """
 

@@ -63,6 +63,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ScanResult'
           description: Success
+  /scan/async/result:
+    get:
+      description: 'Retrieve the scan result for scan job.'
+      tags: [ attachmentAV ]
+      parameters:
+      - in: query
+        name: trace_id
+        schema:
+          type: string
+        required: true
+        description: 'ID used when submitting the scan job.'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanResult'
+          description: Success
+        '404':
+          description: 'Not found'
   /scan/async/download:
     post:
       description: 'Download a file from a remote location (HTTP/HTTPS), scan the file, and post the scan result to your callback URL.'
@@ -74,6 +94,13 @@ paths:
               $ref: '#/components/schemas/AsyncDownloadScanRequest'
         required: true
       responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              schema:
+                type: string
+              description: 'URL to scan result for polling'
         '204':
           description: Success
   /scan/async/s3:
@@ -87,18 +114,14 @@ paths:
               $ref: '#/components/schemas/AsyncS3ScanRequest'
         required: true
       responses:
-        '204':
-          description: Success
-  /usage:
-    get:
-      description: 'Get remaining credits and quota.'
-      tags: [ attachmentAV ]
-      responses:
-        '200':
-          content:
-            application/json:
+        '201':
+          description: Created
+          headers:
+            Location:
               schema:
-                $ref: '#/components/schemas/Usage'
+                type: string
+              description: 'URL to scan result for polling'
+        '204':
           description: Success
   /whoami:
     get:
@@ -111,30 +134,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/Whoami'
           description: Success
+  /usage:
+    get:
+      description: 'Get remaining credits and quota.'
+      tags: [ attachmentAV ]
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Usage'
+          description: Success
 components:
   schemas:
-    ScanResult:
-      example:
-        size: size
-        realfiletype: realfiletype
-        finding: finding
-        status: status
+    Whoami:
       properties:
-        status:
+        tenantId:
           type: string
-        finding:
-          type: string
-        size:
-          type: integer
-        realfiletype:
-          type: string
-      type: object
+      required:
+      - tenantId
     Usage:
-      example:
-        credits: credits
-        quota:
-          limit: limit
-          period: period
       properties:
         credits:
           type: number
@@ -145,18 +164,35 @@ components:
               type: number
             period:
               type: string
-      type: object
+          required:
+          - limit
+          - period
+      required:
+      - credits
+      - quota
+    ScanResult:
+      properties:
+        status:
+          type: string
+        finding:
+          type: string
+        size:
+          type: number
+        realfiletype:
+          type: string
+      required:
+      - status
     SyncDownloadScanRequest:
       properties:
         download_url:
           type: string
+          pattern: '^(?:(?:(?:https?):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$' # https://gist.github.com/dperini/729294
         download_headers:
+          type: object
           additionalProperties:
             type: string
-          type: object
       required:
       - download_url
-      type: object
     SyncS3ScanRequest:
       properties:
         bucket:
@@ -168,29 +204,28 @@ components:
       required:
       - bucket
       - key
-      type: object
     AsyncDownloadScanRequest:
       properties:
         download_url:
           type: string
+          pattern: '^(?:(?:(?:https?):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$' # https://gist.github.com/dperini/729294
         download_headers:
+          type: object
           additionalProperties:
             type: string
-          type: object
         callback_url:
           type: string
+          pattern: '^(?:(?:(?:https?):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$' # https://gist.github.com/dperini/729294
         callback_headers:
+          type: object
           additionalProperties:
             type: string
-          type: object
         trace_id:
           type: string
         custom_data:
           type: string
       required:
-        - download_url
-        - callback_url
-      type: object
+      - download_url
     AsyncS3ScanRequest:
       properties:
         bucket:
@@ -201,26 +236,18 @@ components:
           type: string
         callback_url:
           type: string
+          pattern: '^(?:(?:(?:https?):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$' # https://gist.github.com/dperini/729294
         callback_headers:
+          type: object
           additionalProperties:
             type: string
-          type: object
         trace_id:
           type: string
         custom_data:
           type: string
       required:
-        - bucket
-        - key
-        - callback_url
-      type: object
-    Whoami:
-      example:
-        tenantId: tenantId
-      properties:
-        tenantId:
-          type: string
-      type: object
+      - bucket
+      - key
   securitySchemes:
     apiKeyAuth:
       in: header

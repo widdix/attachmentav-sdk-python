@@ -18,7 +18,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,7 +26,7 @@ class Whoami(BaseModel):
     """
     Whoami
     """ # noqa: E501
-    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
+    tenant_id: StrictStr = Field(alias="tenantId")
     __properties: ClassVar[List[str]] = ["tenantId"]
 
     model_config = ConfigDict(

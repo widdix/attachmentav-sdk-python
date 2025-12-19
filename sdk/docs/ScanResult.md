@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** |  | [optional] 
+**status** | **str** |  | 
 **finding** | **str** |  | [optional] 
-**size** | **int** |  | [optional] 
+**size** | **float** |  | [optional] 
 **realfiletype** | **str** |  | [optional] 
 
 ## Example

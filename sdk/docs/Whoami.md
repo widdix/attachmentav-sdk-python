@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tenant_id** | **str** |  | [optional] 
+**tenant_id** | **str** |  | 
 
 ## Example
 

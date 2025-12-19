@@ -35,14 +35,14 @@ class TestSyncDownloadScanRequest(unittest.TestCase):
         model = SyncDownloadScanRequest()
         if include_optional:
             return SyncDownloadScanRequest(
-                download_url = '',
+                download_url = 'https://rZ# \\vRsp&$ARjbhJkfC< ^&T\\{<\'cs)#<`206.254.11.254',
                 download_headers = {
                     'key' : ''
                     }
             )
         else:
             return SyncDownloadScanRequest(
-                download_url = '',
+                download_url = 'https://rZ# \\vRsp&$ARjbhJkfC< ^&T\\{<\'cs)#<`206.254.11.254',
         )
         """
 

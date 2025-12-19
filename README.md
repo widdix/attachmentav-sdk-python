@@ -18,12 +18,16 @@ Third, send a scan request. Make sure to replace the `<API_KEY_PLACEHOLDER>` pla
 import attachmentav
 
 configuration = attachmentav.Configuration()
+# When using the SaaS offering
 configuration.api_key['apiKeyAuth'] = "<API_KEY_PLACEHOLDER>"
+# When using the self-hosted offering, replace attachmentav.yourcompany.com with the domain name of your attachmentAV API installation: https://attachmentav.com/help/virus-malware-scan-api-aws/developer/definition.html#domain-name
+#configuration.access_token = "<API_KEY_PLACEHOLDER>"
+#configuration.host = "https://attachmentav.yourcompany.com/api/v1"
 
 with attachmentav.ApiClient(configuration) as api_client:
   api_instance = attachmentav.AttachmentAVApi(api_client)
 
-  with open("path/to/file", "rb") as file:
+with open("/path/to/file", "rb") as file:
     file_content = file.read()
     scan_result = api_instance.scan_sync_binary_post(file_content)
     print(scan_result)
@@ -96,10 +100,10 @@ The maximum file size is 10 MB. The request timeout is 60 seconds.
 
 
 ```python
-with open("path/to/file", "rb") as file:
-  file_content = file.read()
-  scan_result = api_instance.scan_sync_binary_post(file_content)
-  print(scan_result)
+with open("/path/to/file", "rb") as file:
+    file_content = file.read()
+    scan_result = api_instance.scan_sync_binary_post(file_content)
+    print(scan_result)
 ```
 
 ### Sync Scan: Download
@@ -114,7 +118,7 @@ The maximum file size is 10 MB. The request timeout is 60 seconds.
 
 ```python
 sync_download_scan_request = attachmentav.SyncDownloadScanRequest(
-  download_url = "https://example.com/demo.txt"
+  download_url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
 )
 scan_result = api_instance.scan_sync_download_post(sync_download_scan_request)
 print(scan_result)
@@ -132,14 +136,14 @@ The maximum file size is 10 MB. The request timeout is 60 seconds.
 
 ```python
 sync_s3_scan_request = attachmentav.SyncS3ScanRequest(
-  bucket = "example-bucket",
-  key = "demo.txt"
+  bucket = "<BUCKET_NAME_PLACEHOLDER>",
+  key = "<OBJECT_KEY_PLACEHOLDER>"
 )
 scan_result = api_instance.scan_sync_s3_post(sync_s3_scan_request)
 print(scan_result)
 ```
 
-### Async Scan: Download
+### Async Scan: Download (callback)
 
 Send a URL to the attachmentAV Virus Scan API. attachmentAV will send the scan result to the callback URL. See [callback URL](https://attachmentav.com/help/virus-malware-scan-api/setup-guide/#callback-url) for details.
 
@@ -151,15 +155,46 @@ The maximum file size is 5 GB. The request timeout is 29 seconds; the asynchrono
 
 ```python
 async_download_scan_request = attachmentav.AsyncDownloadScanRequest(
-  download_url = "https://example.com/demo.txt",
-  callback_url = "https://example.com/callback"
+  download_url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+  callback_url = "https://api.yourcompany.com/attachmentav/callback"
 )
 api_instance.scan_async_download_post(async_download_scan_request)
+print("Async download submitted")
 ```
 
-### Async Scan: S3
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/async-download.py)
 
-Send an S3 bucket name and object key to the attachmentAV Virus Scan API.  attachmentAV will send the scan result to the callback URL. See [callback URL](https://attachmentav.com/help/virus-malware-scan-api/setup-guide/#callback-url) for details.
+### Async Scan: Download (polling)
+
+Send a URL to the attachmentAV Virus Scan API. attachmentAV will download the file and store the scan result for 24 hours.
+
+See [AsyncDownloadScanRequest](sdk/docs/AsyncDownloadScanRequest.md) for details.
+
+The maximum file size is 5 GB. The request timeout is 29 seconds; the asynchronous scan job is not affected by this limit.
+
+> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS) yet. Contact [hello@attachmentav.com](hello@attachmentav.com) to let us know, in case you need this feature. 
+
+```python
+trace_id = str(uuid.uuid4())
+
+async_download_scan_request = attachmentav.AsyncDownloadScanRequest(
+  download_url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+  trace_id = trace_id
+)
+api_instance.scan_async_download_post(async_download_scan_request)
+print("Async download submitted.")
+
+# wait some time...
+
+scan_result = api_instance.scan_async_result_get(trace_id)
+print(scan_result)
+```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/async-download-polling.py)
+
+### Async Scan: S3 (callback)
+
+Send an S3 bucket name and object key to the attachmentAV Virus Scan API. attachmentAV will send the scan result to the callback URL. See [callback URL](https://attachmentav.com/help/virus-malware-scan-api/setup-guide/#callback-url) for details.
 
 See [AsyncS3ScanRequest](sdk/docs/AsyncS3ScanRequest.md) for details.
 
@@ -171,37 +206,71 @@ The maximum file size is 5 GB. The request timeout is 29 seconds; the asynchrono
 
 ```python
 async_s3_scan_request = attachmentav.AsyncS3ScanRequest(
-  bucket = "example-bucket",
-  key = "demo.txt",
-  callback_url = "https://example.com/callback"
+  bucket = "<BUCKET_NAME_PLACEHOLDER>",
+  key = "<OBJECT_KEY_PLACEHOLDER>",
+  callback_url = "https://api.yourcompany.com/attachmentav/callback"
 )
 api_instance.scan_async_s3_post(async_s3_scan_request)
+print("Async S3 submitted")
 ```
 
-### Who AM I
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/async-s3.py)
 
-Get information abour yourself.
+### Async Scan: S3 (polling)
 
-See [Whoami](sdk/models/Whoami.ts) for details.
+Send an S3 bucket name and object key to the attachmentAV Virus Scan API. attachmentAV will download the file and store the scan result for 24 hours.
 
-> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS).
+See [AsyncS3ScanRequest](sdk/docs/AsyncS3ScanRequest.md) for details.
+
+The maximum file size is 5 GB. The request timeout is 29 seconds; the asynchronous scan job is not affected by this limit.
+
+> A [bucket policy](https://attachmentav.com/help/virus-malware-scan-api/setup-guide/#s3-bucket-policy) is required to grant attachmentAV access to private S3 objects.
+
+> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS) yet. Contact [hello@attachmentav.com](hello@attachmentav.com) to let us know, in case you need this feature.
 
 ```python
-whoami_result = api_instance.whoami_get()
-print(whoami_result)
+trace_id = str(uuid.uuid4())
+
+async_s3_scan_request = attachmentav.AsyncS3ScanRequest(
+  bucket = "<BUCKET_NAME_PLACEHOLDER>",
+  key = "<OBJECT_KEY_PLACEHOLDER>",
+  trace_id = trace_id
+)
+api_instance.scan_async_s3_post(async_s3_scan_request)
+print("Async S3 submitted. ")
+
+# wait some time...
+
+scan_result = api_instance.scan_async_result_get(trace_id)
+print(scan_result)
 ```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/async-s3-polling.py)
 
 ### Usage
 
 Get remaining credits and quota.
 
-See [Usage](sdk/models/Usage.ts) for details.
+See [Usage](sdk/docs/Usage.md) for details.
 
 > Not supported by attachmentAV Virus Scan API (Self-hosted on AWS).
 
 ```python
 usage_result = api_instance.usage_get()
 print(usage_result)
+```
+
+### Who am I
+
+Get information abour yourself.
+
+See [Whoami](sdk/docs/Whoami.md) for details.
+
+> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS).
+
+```python
+whoami_result = api_instance.whoami_get()
+print(whoami_result)
 ```
 
 ## Model
@@ -214,6 +283,8 @@ For more details about the data model, please refer to the following pages.
 * [ScanResult](sdk/docs/ScanResult.md)
 * [SyncDownloadScanRequest](sdk/docs/SyncDownloadScanRequest.md)
 * [SyncS3ScanRequest](sdk/docs/SyncS3ScanRequest.md)
+* [Usage](sdk/docs/Usage.md)
+* [Whoami](sdk/docs/Whoami.md)
 
 ## Need help?
 

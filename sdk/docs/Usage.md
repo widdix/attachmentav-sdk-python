@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**credits** | **float** |  | [optional] 
-**quota** | [**UsageQuota**](UsageQuota.md) |  | [optional] 
+**credits** | **float** |  | 
+**quota** | [**UsageQuota**](UsageQuota.md) |  | 
 
 ## Example
 

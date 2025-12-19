@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**limit** | **float** |  | [optional] 
-**period** | **str** |  | [optional] 
+**limit** | **float** |  | 
+**period** | **str** |  | 
 
 ## Example
 

@@ -38,7 +38,7 @@ class TestAsyncS3ScanRequest(unittest.TestCase):
                 bucket = '',
                 key = '',
                 version = '',
-                callback_url = '',
+                callback_url = 'https://rZ# \\vRsp&$ARjbhJkfC< ^&T\\{<\'cs)#<`206.254.11.254',
                 callback_headers = {
                     'key' : ''
                     },
@@ -49,7 +49,6 @@ class TestAsyncS3ScanRequest(unittest.TestCase):
             return AsyncS3ScanRequest(
                 bucket = '',
                 key = '',
-                callback_url = '',
         )
         """
 

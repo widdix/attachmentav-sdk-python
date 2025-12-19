@@ -8,7 +8,9 @@ python3 sync-binary.py
 python3 sync-s3.py
 
 python3 async-download.py
+python3 async-download-polling.py
 python3 async-s3.py
+python3 async-s3-polling.py
 
 pip3 install cryptography
 python3 verify-callback.py # Replace <CALLBACK_URL_PLACEHOLDER> as described in the code.

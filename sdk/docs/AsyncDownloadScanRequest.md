@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **download_url** | **str** |  | 
 **download_headers** | **Dict[str, str]** |  | [optional] 
-**callback_url** | **str** |  | 
+**callback_url** | **str** |  | [optional] 
 **callback_headers** | **Dict[str, str]** |  | [optional] 
 **trace_id** | **str** |  | [optional] 
 **custom_data** | **str** |  | [optional] 
