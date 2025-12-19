@@ -20,7 +20,7 @@ print("Async download submitted. Start to poll for scan result...")
 
 i = 0
 while True:
-  print('.');
+  print('.')
   try:
     scan_result = api_instance.scan_async_result_get(trace_id)
     print(scan_result)
