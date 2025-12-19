@@ -89,7 +89,6 @@ with attachmentav.ApiClient(configuration) as api_client:
 
 ## Examples
 
-
 ### Sync Scan: File
 
 Send a file to the attachmentAV Virus Scan API and process the scan result.
@@ -105,6 +104,8 @@ with open("/path/to/file", "rb") as file:
     scan_result = api_instance.scan_sync_binary_post(file_content)
     print(scan_result)
 ```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/sync-binary.py)
 
 ### Sync Scan: Download
 
@@ -124,6 +125,8 @@ scan_result = api_instance.scan_sync_download_post(sync_download_scan_request)
 print(scan_result)
 ```
 
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/sync-download.py)
+
 ### Sync Scan: S3
 
 Send an S3 bucket name and object key to the attachmentAV Virus Scan API. attachmentAV will download the file and return the scan result immediately.
@@ -142,6 +145,8 @@ sync_s3_scan_request = attachmentav.SyncS3ScanRequest(
 scan_result = api_instance.scan_sync_s3_post(sync_s3_scan_request)
 print(scan_result)
 ```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/sync-s3.py)
 
 ### Async Scan: Download (callback)
 
@@ -260,6 +265,8 @@ usage_result = api_instance.usage_get()
 print(usage_result)
 ```
 
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/usage.py)
+
 ### Who am I
 
 Get information abour yourself.
@@ -272,6 +279,8 @@ See [Whoami](sdk/docs/Whoami.md) for details.
 whoami_result = api_instance.whoami_get()
 print(whoami_result)
 ```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/whoami.py)
 
 ## Model
 
