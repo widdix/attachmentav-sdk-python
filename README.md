@@ -19,6 +19,7 @@ Third, send a scan request. Make sure to replace the `<API_KEY_PLACEHOLDER>` pla
 * `https://us.developer.attachmentav.com/v1/` (United States of America)
 * `https://canada.developer.attachmentav.com/v1/` (Canada)
 * `https://india.developer.attachmentav.com/v1/` (India)
+* `https://australia.developer.attachmentav.com/v1/` (Australia)
 
 **API endpoint (Self-hosted on AWS)**
 
@@ -76,6 +77,7 @@ An [active subscription and API key](https://attachmentav.com/help/virus-malware
 * `https://us.developer.attachmentav.com/v1/` (United States of America)
 * `https://canada.developer.attachmentav.com/v1/` (Canada)
 * `https://india.developer.attachmentav.com/v1/` (India)
+* `https://australia.developer.attachmentav.com/v1/` (Australia)
 
 ```python
 import attachmentav
