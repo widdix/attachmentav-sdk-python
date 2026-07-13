@@ -17,20 +17,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
-from typing import Any, ClassVar, Dict, List, Union
-from attachmentav.models.usage_quota import UsageQuota
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
-class Usage(BaseModel):
+class CallbackFailure(BaseModel):
     """
-    Usage
+    CallbackFailure
     """ # noqa: E501
-    credits: Union[StrictFloat, StrictInt]
-    quota: UsageQuota
-    __properties: ClassVar[List[str]] = ["credits", "quota"]
+    id: StrictStr
+    time: datetime
+    download_url: StrictStr
+    callback_url: StrictStr
+    error_json: StrictStr
+    __properties: ClassVar[List[str]] = ["id", "time", "download_url", "callback_url", "error_json"]
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -50,7 +53,7 @@ class Usage(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Usage from a JSON string"""
+        """Create an instance of CallbackFailure from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,14 +74,11 @@ class Usage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of quota
-        if self.quota:
-            _dict['quota'] = self.quota.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Usage from a dict"""
+        """Create an instance of CallbackFailure from a dict"""
         if obj is None:
             return None
 
@@ -86,8 +86,11 @@ class Usage(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "credits": obj.get("credits"),
-            "quota": UsageQuota.from_dict(obj["quota"]) if obj.get("quota") is not None else None
+            "id": obj.get("id"),
+            "time": obj.get("time"),
+            "download_url": obj.get("download_url"),
+            "callback_url": obj.get("callback_url"),
+            "error_json": obj.get("error_json")
         })
         return _obj
 

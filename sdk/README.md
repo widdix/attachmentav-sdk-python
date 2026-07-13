@@ -12,17 +12,28 @@ pip install attachmentav-virus-malware-scan-sdk
 
 Second, get an API key by [subscribing to the attachmentAV API (SaaS)](https://attachmentav.com/subscribe/api/).
 
-Third, send a scan request. Make sure to replace the `<API_KEY_PLACEHOLDER>` placeholder.
+Third, send a scan request. Make sure to replace the `<API_KEY_PLACEHOLDER>` placeholder and `<API_ENDPOINT_PLACEHOLDER>` with the API endpoint.
+
+**API endpoints (SaaS)**
+* `https://eu.developer.attachmentav.com/v1/` (Europe)
+* `https://us.developer.attachmentav.com/v1/` (United States of America)
+* `https://canada.developer.attachmentav.com/v1/` (Canada)
+* `https://india.developer.attachmentav.com/v1/` (India)
+* `https://australia.developer.attachmentav.com/v1/` (Australia)
+
+**API endpoint (Self-hosted on AWS)**
+
+When following the setup guide, you specified the `ApiKeys` parameter for the CloudFormation stack. Replace `<API_KEY_PLACEHOLDER>` with one of those keys and `<API_ENDPOINT_PLACEHOLDER>` with the API endpoint.
+
+Example, replace `attachmentav.yourcompany.com` with the domain name of your [attachmentAV API installation](https://attachmentav.com/help/virus-malware-scan-api-aws/developer/definition.html#domain-name): 
+`https://attachmentav.yourcompany.com/api/v1`.
 
 ```python
 import attachmentav
 
 configuration = attachmentav.Configuration()
-# When using the SaaS offering
 configuration.api_key['apiKeyAuth'] = "<API_KEY_PLACEHOLDER>"
-# When using the self-hosted offering, replace attachmentav.yourcompany.com with the domain name of your attachmentAV API installation: https://attachmentav.com/help/virus-malware-scan-api-aws/developer/definition.html#domain-name
-#configuration.access_token = "<API_KEY_PLACEHOLDER>"
-#configuration.host = "https://attachmentav.yourcompany.com/api/v1"
+configuration.host = "<API_ENDPOINT_PLACEHOLDER>"
 
 with attachmentav.ApiClient(configuration) as api_client:
   api_instance = attachmentav.AttachmentAVApi(api_client)
@@ -60,13 +71,20 @@ pip install attachmentav-virus-malware-scan-sdk
 
 ### Configure SDK (SaaS)
 
-An [active subscription and API key](https://attachmentav.com/help/virus-malware-scan-api/setup-guide/#api-key) are required. Replace `<API_KEY_PLACEHOLDER>` with the API key.
+An [active subscription and API key](https://attachmentav.com/help/virus-malware-scan-api/setup-guide/#api-key) are required. Replace `<API_KEY_PLACEHOLDER>` with the API key and `<API_ENDPOINT_PLACEHOLDER>` with the API endpoint. The API endpoint (region) must match with the region selected for the subscription. The default is `Europe`.
+
+* `https://eu.developer.attachmentav.com/v1/` (Europe)
+* `https://us.developer.attachmentav.com/v1/` (United States of America)
+* `https://canada.developer.attachmentav.com/v1/` (Canada)
+* `https://india.developer.attachmentav.com/v1/` (India)
+* `https://australia.developer.attachmentav.com/v1/` (Australia)
 
 ```python
 import attachmentav
 
 configuration = attachmentav.Configuration()
 configuration.api_key['apiKeyAuth'] = "<API_KEY_PLACEHOLDER>"
+configuration.host = "<API_ENDPOINT_PLACEHOLDER>"
 
 with attachmentav.ApiClient(configuration) as api_client:
   api_instance = attachmentav.AttachmentAVApi(api_client)
@@ -74,21 +92,23 @@ with attachmentav.ApiClient(configuration) as api_client:
 
 ### Configure SDK (self-hosted on AWS)
 
-When following the setup guide, you specified the `ApiKeys` parameter for the CloudFormation stack. Replace `<API_KEY_PLACEHOLDER>` with one of those keys. 
+When following the setup guide, you specified the `ApiKeys` parameter for the CloudFormation stack.Replace `<API_KEY_PLACEHOLDER>` with one of those keys and `<API_ENDPOINT_PLACEHOLDER>` with the API endpoint.
+
+Example, replace `attachmentav.yourcompany.com` with the domain name of your [attachmentAV API installation](https://attachmentav.com/help/virus-malware-scan-api-aws/developer/definition.html#domain-name): 
+`https://attachmentav.yourcompany.com/api/v1`.
 
 ```python
 import attachmentav
 
 configuration = attachmentav.Configuration()
 configuration.access_token = "<API_KEY_PLACEHOLDER>"
-configuration.host = "https://attachmentav.yourcompany.com/api/v1"
+configuration.host = "<API_ENDPOINT_PLACEHOLDER>"
 
 with attachmentav.ApiClient(configuration) as api_client:
   api_instance = attachmentav.AttachmentAVApi(api_client)
 ```
 
 ## Examples
-
 
 ### Sync Scan: File
 
@@ -105,6 +125,8 @@ with open("/path/to/file", "rb") as file:
     scan_result = api_instance.scan_sync_binary_post(file_content)
     print(scan_result)
 ```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/sync-binary.py)
 
 ### Sync Scan: Download
 
@@ -124,6 +146,8 @@ scan_result = api_instance.scan_sync_download_post(sync_download_scan_request)
 print(scan_result)
 ```
 
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/sync-download.py)
+
 ### Sync Scan: S3
 
 Send an S3 bucket name and object key to the attachmentAV Virus Scan API. attachmentAV will download the file and return the scan result immediately.
@@ -142,6 +166,8 @@ sync_s3_scan_request = attachmentav.SyncS3ScanRequest(
 scan_result = api_instance.scan_sync_s3_post(sync_s3_scan_request)
 print(scan_result)
 ```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/sync-s3.py)
 
 ### Async Scan: Download (callback)
 
@@ -247,6 +273,21 @@ print(scan_result)
 
 Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/async-s3-polling.py)
 
+### List callback failures
+
+List callback failures that prevent attachmentAV from invoking the defined callback_url. Sorted by time in descending order (youngest failure is returned first). Callback failures are stored for 30 days.
+
+See [CallbackFailures](sdk/docs/CallbackFailures.ts) for details.
+
+> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS).
+
+```python
+callback_failures = api_instance.callback_failures_get('https://api.yourcompany.com/attachmentav/callback')
+print(callback_failures)
+```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/callback-failures.py)
+
 ### Usage
 
 Get remaining credits and quota.
@@ -260,6 +301,8 @@ usage_result = api_instance.usage_get()
 print(usage_result)
 ```
 
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/usage.py)
+
 ### Who am I
 
 Get information abour yourself.
@@ -272,6 +315,8 @@ See [Whoami](sdk/docs/Whoami.md) for details.
 whoami_result = api_instance.whoami_get()
 print(whoami_result)
 ```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/whoami.py)
 
 ## Model
 

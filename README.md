@@ -273,6 +273,21 @@ print(scan_result)
 
 Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/async-s3-polling.py)
 
+### List callback failures
+
+List callback failures that prevent attachmentAV from invoking the defined callback_url. Sorted by time in descending order (youngest failure is returned first). Callback failures are stored for 30 days.
+
+See [CallbackFailures](sdk/docs/CallbackFailures.ts) for details.
+
+> Not supported by attachmentAV Virus Scan API (Self-hosted on AWS).
+
+```python
+callback_failures = api_instance.callback_failures_get('https://api.yourcompany.com/attachmentav/callback')
+print(callback_failures)
+```
+
+Find full example [here](https://github.com/widdix/attachmentav-sdk-python/blob/main/examples/callback-failures.py)
+
 ### Usage
 
 Get remaining credits and quota.

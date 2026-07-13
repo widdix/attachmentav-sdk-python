@@ -14,7 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 # Define package exports
 __all__ = [
@@ -30,6 +30,8 @@ __all__ = [
     "ApiException",
     "AsyncDownloadScanRequest",
     "AsyncS3ScanRequest",
+    "CallbackFailure",
+    "CallbackFailures",
     "ScanResult",
     "SyncDownloadScanRequest",
     "SyncS3ScanRequest",
@@ -55,6 +57,8 @@ from attachmentav.exceptions import ApiException as ApiException
 # import models into sdk package
 from attachmentav.models.async_download_scan_request import AsyncDownloadScanRequest as AsyncDownloadScanRequest
 from attachmentav.models.async_s3_scan_request import AsyncS3ScanRequest as AsyncS3ScanRequest
+from attachmentav.models.callback_failure import CallbackFailure as CallbackFailure
+from attachmentav.models.callback_failures import CallbackFailures as CallbackFailures
 from attachmentav.models.scan_result import ScanResult as ScanResult
 from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest as SyncDownloadScanRequest
 from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest as SyncS3ScanRequest

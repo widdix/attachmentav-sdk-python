@@ -123,9 +123,32 @@ paths:
               description: 'URL to scan result for polling'
         '204':
           description: Success
+  /callback/failures:
+    get:
+      description: 'List callback failures'
+      tags: [attachmentAV]
+      parameters:
+      - in: query
+        name: callback_url
+        schema:
+          type: string
+        required: true
+        description: 'URL to receive the scan result via HTTPS POST'
+      - in: query
+        name: cursor
+        schema:
+          type: string
+        description: 'Use the next_cursor value from a previous response to page through failures'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallbackFailures'
+          description: Success
   /whoami:
     get:
-      description: 'Get information abour yourself.'
+      description: 'Get information about yourself.'
       tags: [attachmentAV]
       responses:
         '200':
@@ -170,6 +193,35 @@ components:
       required:
       - credits
       - quota
+    CallbackFailures:
+      properties:
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/CallbackFailure'
+        next_cursor:
+          type: string
+      required:
+      - failures
+    CallbackFailure:
+      properties:
+        id:
+          type: string
+        time:
+          type: string
+          format: 'date-time'
+        download_url:
+          type: string
+        callback_url:
+          type: string
+        error_json:
+          type: string
+      required:
+      - id
+      - time
+      - download_url
+      - callback_url
+      - error_json
     ScanResult:
       properties:
         status:

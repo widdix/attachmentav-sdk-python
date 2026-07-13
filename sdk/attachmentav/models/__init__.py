@@ -15,6 +15,8 @@
 # import models into model package
 from attachmentav.models.async_download_scan_request import AsyncDownloadScanRequest
 from attachmentav.models.async_s3_scan_request import AsyncS3ScanRequest
+from attachmentav.models.callback_failure import CallbackFailure
+from attachmentav.models.callback_failures import CallbackFailures
 from attachmentav.models.scan_result import ScanResult
 from attachmentav.models.sync_download_scan_request import SyncDownloadScanRequest
 from attachmentav.models.sync_s3_scan_request import SyncS3ScanRequest
