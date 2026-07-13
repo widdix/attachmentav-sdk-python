@@ -67,6 +67,7 @@ setup(
 cd sdk
 cp ../README.md .
 python3 -m pip install --upgrade pip build twine
+rm -rf dist/
 python3 -m build
 # Use for testing
 # python3 -m twine upload --repository testpypi dist/*
